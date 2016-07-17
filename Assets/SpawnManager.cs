@@ -12,8 +12,47 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Vector3 startingPosition = new Vector3(-5, 0, 0);
-        GameObject newEnemy = (GameObject)Instantiate(enemy, startingPosition, new Quaternion(0, 0, 90, 90));
+        Direction direction = (Direction)Random.Range(1, 5);
+        Vector3 startPosition;
+        Quaternion rotation;
+        GameObject newEnemy;
+        Vector3 heading;
+
+        if (direction == Direction.Down)
+        {
+            startPosition = new Vector3(0, 10);
+            rotation = new Quaternion();
+            heading = Vector3.down;
+        }
+        else if (direction == Direction.Right)
+        {
+            startPosition = new Vector3(-10, 0);
+            rotation = Quaternion.Euler(0, 0, 90);
+            heading = Vector3.right;
+        }
+        else if (direction == Direction.Up)
+        {
+            startPosition = new Vector3(0, -10);
+            rotation = Quaternion.Euler(0, 0, 180);
+            heading = Vector3.up;
+        }
+        else
+        {
+            startPosition = new Vector3(10, 0);
+            rotation = Quaternion.Euler(0, 0, 270);
+            heading = Vector3.left;
+        }
+
+        newEnemy = (GameObject)Instantiate(enemy, startPosition, rotation);
+        newEnemy.GetComponent<EnemyManager>().Direction = heading;
+    }
+
+    private enum Direction
+    {
+        Down = 1,
+        Right = 2,
+        Up = 3,
+        Left = 4
     }
 
     private GameObject enemy;

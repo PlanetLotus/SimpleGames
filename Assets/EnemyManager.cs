@@ -9,8 +9,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        Direction = Vector3.right;
-
         GetComponent<Rigidbody2D>().velocity = Direction * Speed;
     }
 
