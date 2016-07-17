@@ -16,6 +16,14 @@ public class EnemyManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
+        if (other.name == "Player")
+        {
+            Debug.Log("Player hit by enemy");
+            Destroy(gameObject);
+        }
+        else if (other.name.Contains("Zapper"))
+        {
+            Debug.Log("Now would be a good time to zap...");
+        }
     }
 }
