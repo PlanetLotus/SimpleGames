@@ -18,12 +18,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            Debug.Log("Player hit by enemy");
             Destroy(gameObject);
-        }
-        else if (other.name.Contains("Zapper"))
-        {
-            Debug.Log("Now would be a good time to zap...");
         }
     }
 }
