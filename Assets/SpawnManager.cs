@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     private void SpawnEnemy()
     {
         Vector3 startingPosition = new Vector3(-5, 0, 0);
-        GameObject newEnemy = (GameObject)Instantiate(enemy, startingPosition, new Quaternion());
+        GameObject newEnemy = (GameObject)Instantiate(enemy, startingPosition, new Quaternion(0, 0, 90, 90));
     }
 
     private GameObject enemy;
