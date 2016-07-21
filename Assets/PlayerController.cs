@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public int Health = 10;
+    public Slider zapperSlider;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -17,4 +19,32 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Update()
+    {
+        if (!charging && Input.GetKeyDown(KeyCode.Space))
+        {
+            charging = true;
+        }
+
+        if (charging)
+        {
+            zapperSlider.value += Time.deltaTime / ChargeTimeInSeconds;
+        }
+
+        if (zapperSlider.value >= zapperSlider.maxValue)
+        {
+            charging = false;
+            Zap();
+            zapperSlider.value = 0;
+        }
+    }
+
+    private void Zap()
+    {
+        Debug.Log("Zap!");
+    }
+
+    private const int ChargeTimeInSeconds = 2;
+    private bool charging = false;
 }
