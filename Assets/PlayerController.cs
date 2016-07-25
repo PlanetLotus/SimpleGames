@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public int Health = 10;
     public Slider zapperSlider;
+    public Light lightSource;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (charging)
         {
             zapperSlider.value += Time.deltaTime / ChargeTimeInSeconds;
+            lightSource.intensity += Time.deltaTime / ChargeTimeInSeconds;
         }
 
         if (zapperSlider.value >= zapperSlider.maxValue)
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
             charging = false;
             Zap();
             zapperSlider.value = 0;
+            lightSource.intensity = 0;
         }
     }
 
