@@ -19,4 +19,9 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log(other.name);
+    }
 }

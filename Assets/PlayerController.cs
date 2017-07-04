@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public int Health = 10;
     public Slider zapperSlider;
     public Light lightSource;
+    public GameObject zapper;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

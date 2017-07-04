@@ -305,6 +305,7 @@ MonoBehaviour:
   Health: 10
   zapperSlider: {fileID: 520356027}
   lightSource: {fileID: 162183000}
+  zapper: {fileID: 1604327504}
 --- !u!1 &401399642
 GameObject:
   m_ObjectHideFlags: 0
