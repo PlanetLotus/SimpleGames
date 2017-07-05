@@ -1,123 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BinaryTreeVisualizer
+public class BinarySearchTree<T> where T : IComparable
 {
-    public sealed class BinarySearchTree<T> where T : IComparable
+    public Node<T> Root { get; set; }
+
+    public BinarySearchTree(List<T> initData)
     {
-        public Node<T> Root { get; set; }
-
-        public BinarySearchTree(List<T> initData)
+        foreach (var data in initData)
         {
-            foreach (var data in initData)
-            {
-                // This is probably naive, but it will work for now
-                Root = Insert(Root, data);
-            }
+            // This is probably naive, but it will work for now
+            Root = Insert(Root, data);
+        }
+    }
+
+    public Node<T> Insert(Node<T> node, T data)
+    {
+        if (node == null)
+        {
+            return new Node<T>(data);
+        }
+        else if (data.CompareTo(node.Data) < 0)
+        {
+            // Data is smaller than this node's data
+            node.Left = Insert(node.Left, data);
+        }
+        else
+        {
+            // Data is bigger than or equal to this node's data
+            node.Right = Insert(node.Right, data);
         }
 
-        public Node<T> Insert(Node<T> node, T data)
-        {
-            if (node == null)
-            {
-                return new Node<T>(data);
-            }
-            else if (data.CompareTo(node.Data) < 0)
-            {
-                // Data is smaller than this node's data
-                node.Left = Insert(node.Left, data);
-            }
-            else
-            {
-                // Data is bigger than or equal to this node's data
-                node.Right = Insert(node.Right, data);
-            }
+        return node;
+    }
 
-            return node;
+    public void Delete(T data)
+    {
+    }
+
+    public IEnumerable<T> GetPreOrderTraversal()
+    {
+        return DoPreOrderTraversal(Root);
+    }
+
+    public IEnumerable<T> GetInOrderTraversal()
+    {
+        return DoInOrderTraversal(Root);
+    }
+
+    public T GetMin()
+    {
+        if (Root == null)
+        {
+            return default(T);
         }
 
-        public void Delete(T data)
+        Node<T> node = Root;
+        while (node.Left != null)
         {
+            node = node.Left;
         }
 
-        public IEnumerable<T> GetPreOrderTraversal()
+        return node.Data;
+    }
+
+    public T GetMax()
+    {
+        if (Root == null)
         {
-            return DoPreOrderTraversal(Root);
+            return default(T);
         }
 
-        public IEnumerable<T> GetInOrderTraversal()
+        Node<T> node = Root;
+        while (node.Right != null)
         {
-            return DoInOrderTraversal(Root);
+            node = node.Right;
         }
 
-        public T GetMin()
+        return node.Data;
+    }
+
+    private IEnumerable<T> DoPreOrderTraversal(Node<T> root)
+    {
+        List<T> nodes = new List<T>();
+
+        nodes.Add(root.Data);
+
+        if (root.Left != null)
         {
-            if (Root == null)
-            {
-                return default(T);
-            }
-
-            Node<T> node = Root;
-            while (node.Left != null)
-            {
-                node = node.Left;
-            }
-
-            return node.Data;
+            nodes.AddRange(DoInOrderTraversal(root.Left));
         }
 
-        public T GetMax()
+        if (root.Right != null)
         {
-            if (Root == null)
-            {
-                return default(T);
-            }
-
-            Node<T> node = Root;
-            while (node.Right != null)
-            {
-                node = node.Right;
-            }
-
-            return node.Data;
+            nodes.AddRange(DoInOrderTraversal(root.Right));
         }
 
-        private IEnumerable<T> DoPreOrderTraversal(Node<T> root)
+        return nodes;
+    }
+
+    private IEnumerable<T> DoInOrderTraversal(Node<T> root)
+    {
+        List<T> nodes = new List<T>();
+
+        if (root.Left != null)
         {
-            List<T> nodes = new List<T>();
-
-            nodes.Add(root.Data);
-
-            if (root.Left != null)
-            {
-                nodes.AddRange(DoInOrderTraversal(root.Left));
-            }
-
-            if (root.Right != null)
-            {
-                nodes.AddRange(DoInOrderTraversal(root.Right));
-            }
-
-            return nodes;
+            nodes.AddRange(DoInOrderTraversal(root.Left));
         }
 
-        private IEnumerable<T> DoInOrderTraversal(Node<T> root)
+        nodes.Add(root.Data);
+
+        if (root.Right != null)
         {
-            List<T> nodes = new List<T>();
-
-            if (root.Left != null)
-            {
-                nodes.AddRange(DoInOrderTraversal(root.Left));
-            }
-
-            nodes.Add(root.Data);
-
-            if (root.Right != null)
-            {
-                nodes.AddRange(DoInOrderTraversal(root.Right));
-            }
-
-            return nodes;
+            nodes.AddRange(DoInOrderTraversal(root.Right));
         }
+
+        return nodes;
     }
 }
