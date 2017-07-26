@@ -7,10 +7,17 @@ public class BinarySearchTree<T> where T : IComparable
 
     public BinarySearchTree(List<T> initData)
     {
-        foreach (var data in initData)
+        // This is probably naive, but it will work for now
+        for (var i = 0; i < initData.Count; i++)
         {
-            // This is probably naive, but it will work for now
-            Root = Insert(Root, data);
+            if (i == 0)
+            {
+                Root = Insert(Root, initData[i]);
+            }
+            else
+            {
+                Insert(Root, initData[i]);
+            }
         }
     }
 
