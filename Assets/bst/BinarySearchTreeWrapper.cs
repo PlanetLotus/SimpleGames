@@ -26,13 +26,16 @@ public class BinarySearchTreeWrapper : MonoBehaviour
     private void UpdateVisualBst()
     {
         var nodePrefab = (GameObject)Resources.Load("Node");
+        var start = new Vector3(0, 5, 0);
 
-        var nodes = bst.GetInOrderTraversal();
+        var nodes = bst.GetPreOrderTraversal();
         foreach (var node in nodes)
         {
-            var nodeObj = Instantiate(nodePrefab, new Vector3(), Quaternion.identity);
+            start.y -= 1;
+            var nodeObj = Instantiate(nodePrefab, start, Quaternion.identity);
             var textMesh = nodeObj.GetComponent<TextMesh>();
             textMesh.text = node.ToString();
+            Debug.Log(node.ToString());
         }
     }
 }

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9f4002bc73de0488c1a51e7bf451d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingNodes: 01000000020000000300000004000000
+  StartingNodes: 020000000100000003000000
 --- !u!1001 &714597787
 Prefab:
   m_ObjectHideFlags: 0
