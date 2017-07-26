@@ -40,6 +40,20 @@ public class BinarySearchTreeWrapper : MonoBehaviour
     /// </summary>
     private void UpdateVisualBst()
     {
+        // NEXT:
+        // - Rewrite this method to take advantage of the fact that T is a Cube
+        //   which should make it easier to figure out how/where to draw the cube.
+        // - Refactor any common logic between here and Start().
+        // - Start working on drawing the cubes in a reasonable way at runtime.
+        // The awkward part now is that BST relies on the cubes already existing, which
+        // means the visual part exists before the actual structure does. This is kind of odd.
+        // But, this only requires that the objects are instantiated; they don't have to be shown
+        // or put in the right place right away. Simply instantiating them is trivial.
+        // This also means the whole tree shouldn't need recreated on update.
+        // Before, we were starting with the underlying BST structure and then refreshing the visual
+        // on every update, completely throwing away the game objects and starting from scratch.
+        // Now, we can start with a tree and then update it one object at a time as needed by
+        // reading the info from the tree structure.
         var nodePrefab = (GameObject)Resources.Load("Node");
         var start = new Vector3(0, 5, 0);
 
