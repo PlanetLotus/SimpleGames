@@ -17,14 +17,22 @@ public class BinarySearchTreeWrapper : MonoBehaviour
 
         bst = new BinarySearchTree<int>(StartingNodes);
 
-        foreach (var value in StartingNodes)
-        {
-            var obj = Instantiate(node, new Vector3(), Quaternion.identity);
-        }
+        UpdateVisualBst();
     }
 
-    private void Update()
+    /// <summary>
+    /// Recreates the visual tree based on the current underlying BST structure.
+    /// </summary>
+    private void UpdateVisualBst()
     {
+        var nodePrefab = (GameObject)Resources.Load("Node");
 
+        var nodes = bst.GetInOrderTraversal();
+        foreach (var node in nodes)
+        {
+            var nodeObj = Instantiate(nodePrefab, new Vector3(), Quaternion.identity);
+            var textMesh = nodeObj.GetComponent<TextMesh>();
+            textMesh.text = node.ToString();
+        }
     }
 }
