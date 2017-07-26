@@ -8,16 +8,31 @@ public class BinarySearchTreeWrapper : MonoBehaviour
 {
     public List<int> StartingNodes;
 
-    private BinarySearchTree<int> bst;
-    private GameObject node;
+    private BinarySearchTree<Cube> bst;
 
     private void Start()
     {
-        node = (GameObject)Resources.Load("Node");
+        var nodePrefab = (GameObject)Resources.Load("Node");
+        var start = new Vector3(0, 4, 0);
+        var cubes = new List<Cube>();
 
-        bst = new BinarySearchTree<int>(StartingNodes);
+        foreach (var node in StartingNodes)
+        {
+            var nodeObj = Instantiate(nodePrefab, start, Quaternion.identity);
 
-        UpdateVisualBst();
+            var cube = nodePrefab.GetComponent<Cube>();
+            cube.Data = node;
+
+            var textMesh = nodeObj.GetComponent<TextMesh>();
+            textMesh.text = node.ToString();
+
+            cubes.Add(cube);
+            start.y -= 1;
+        }
+
+        bst = new BinarySearchTree<Cube>(cubes);
+
+        //UpdateVisualBst();
     }
 
     /// <summary>
