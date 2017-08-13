@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -33,6 +34,32 @@ public class BinarySearchTreeWrapper : MonoBehaviour
         bst = new BinarySearchTree<Cube>(cubes);
 
         //UpdateVisualBst();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.Insert(10);
+        }
+    }
+
+    private void Insert(int value)
+    {
+        // Temp hack to put new cube in a reasonable spot
+        var numCubes = bst.GetInOrderTraversal().Count();
+        var start = new Vector3(0, 4 - numCubes, 0);
+
+        var nodePrefab = (GameObject)Resources.Load("Node");
+        var nodeObj = Instantiate(nodePrefab, start, Quaternion.identity);
+
+        var cube = nodePrefab.GetComponent<Cube>();
+        cube.Data = value;
+
+        var textMesh = nodeObj.GetComponent<TextMesh>();
+        textMesh.text = value.ToString();
+
+        bst.Insert(bst.Root, cube);
     }
 
     /// <summary>
