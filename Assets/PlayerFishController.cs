@@ -11,6 +11,16 @@ public class PlayerFishController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            var eating = animator.GetBool("Eating");
+            animator.SetBool("Eating", !eating);
+        }
     }
 
     private void FixedUpdate()
@@ -38,4 +48,5 @@ public class PlayerFishController : MonoBehaviour
 
     private Rigidbody2D rb;
     private BoxCollider2D coll;
+    private Animator animator;
 }
