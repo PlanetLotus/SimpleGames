@@ -5,8 +5,7 @@ public class PlayerFishController : MonoBehaviour
     [HideInInspector]
     public bool FacingLeft = true;
 
-    public float MoveForce = 365f;
-    public float MaxSpeed = 5f;
+    public float Speed = 100f;
 
     private void Start()
     {
@@ -16,19 +15,14 @@ public class PlayerFishController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
 
-        if (h * rb.velocity.x < MaxSpeed)
-        {
-            rb.AddForce(Vector2.right * h * MoveForce);
-        }
+        var movement = new Vector2(moveHorizontal, moveVertical);
 
-        if (Mathf.Abs(rb.velocity.x) > MaxSpeed)
-        {
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * MaxSpeed, rb.velocity.y);
-        }
+        rb.AddForce(movement * Speed);
 
-        if ((h > 0 && FacingLeft) || (h < 0 && !FacingLeft))
+        if ((moveHorizontal > 0 && FacingLeft) || (moveHorizontal < 0 && !FacingLeft))
         {
             Flip();
         }
