@@ -25,10 +25,12 @@ public class PlayerFishController : MonoBehaviour
 
     private void Update()
     {
+        // For testing
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            var eating = animator.GetBool("Eating");
-            animator.SetBool("Eating", !eating);
+            var sizeIncrement = new Vector2(1, 1);
+            gameObject.GetComponent<SpriteRenderer>().size += sizeIncrement;
+            gameObject.GetComponent<BoxCollider2D>().size += sizeIncrement;
         }
     }
 
