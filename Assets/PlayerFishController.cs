@@ -14,6 +14,14 @@ public class PlayerFishController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // TODO: Add logic for different types of units
+        // For now, player only collides with fish it can eat
+        Destroy(other.gameObject);
+        animator.SetBool("Eating", true);
+    }
+
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
