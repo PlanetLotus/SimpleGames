@@ -18,6 +18,7 @@ public class PlayerFishController : MonoBehaviour
     {
         // TODO: Add logic for different types of units
         // For now, player only collides with fish it can eat
+        FishManager.NumEnemies--;
         Destroy(other.gameObject);
         animator.SetBool("Eating", true);
     }

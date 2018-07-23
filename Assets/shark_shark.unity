@@ -155,48 +155,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9988e8e10a0ab439acb35a610a7e6a, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &268738275
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 5.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163682690367864, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 27cada8a17c4fcf44875fe74f2a064a8, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &613092235
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +244,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 829047919}
+  - component: {fileID: 829047920}
   m_Layer: 0
   m_Name: _SCENE
   m_TagString: Untagged
@@ -308,6 +267,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &829047920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829047918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6778eeac6d74bb4caba9c18bd548b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxEnemies: 5
+  SpawnRateInSeconds: 5
 --- !u!1 &1431891442
 GameObject:
   m_ObjectHideFlags: 0
