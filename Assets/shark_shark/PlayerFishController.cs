@@ -7,11 +7,16 @@ public class PlayerFishController : MonoBehaviour
 
     public float Speed = 100f;
 
+    public Vector2 MaxScale;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<BoxCollider2D>();
+        collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+
+        maxSize = sprite.size * MaxScale;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -21,6 +26,7 @@ public class PlayerFishController : MonoBehaviour
         FishManager.NumEnemies--;
         Destroy(other.gameObject);
         animator.SetBool("Eating", true);
+        Grow();
     }
 
     private void Update()
@@ -28,9 +34,7 @@ public class PlayerFishController : MonoBehaviour
         // For testing
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            var sizeIncrement = new Vector2(1, 1);
-            gameObject.GetComponent<SpriteRenderer>().size += sizeIncrement;
-            gameObject.GetComponent<BoxCollider2D>().size += sizeIncrement;
+            Grow();
         }
     }
 
@@ -57,7 +61,23 @@ public class PlayerFishController : MonoBehaviour
         transform.localScale = scale;
     }
 
+    private void Grow()
+    {
+        if (sprite.size.magnitude >= maxSize.magnitude)
+        {
+            Debug.Log("Too big!");
+            return;
+        }
+
+        sprite.size += growBy;
+        collider.size += growBy;
+    }
+
     private Rigidbody2D rb;
-    private BoxCollider2D coll;
+    private BoxCollider2D collider;
     private Animator animator;
+    private SpriteRenderer sprite;
+
+    private Vector2 maxSize;
+    private Vector2 growBy = new Vector2(0.5f, 0.5f);
 }

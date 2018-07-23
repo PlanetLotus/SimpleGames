@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FacingLeft: 1
   Speed: 20
+  MaxScale: {x: 3, y: 3}
 --- !u!61 &1431891447
 BoxCollider2D:
   m_ObjectHideFlags: 0
