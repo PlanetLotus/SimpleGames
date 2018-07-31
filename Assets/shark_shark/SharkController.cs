@@ -4,6 +4,7 @@ public class SharkController : EnemyController
 {
     public int StateChangeIntervalInSeconds;
     public float ChargeSpeed;
+    public float ChargeChance;
 
     protected override void Start()
     {
@@ -34,8 +35,7 @@ public class SharkController : EnemyController
 
     private void PickRandomState()
     {
-        // ~20% chance to charge
-        var charge = Random.value > 0.8;
+        var charge = Random.value < ChargeChance;
         if (charge)
         {
             Charge();
@@ -74,8 +74,6 @@ public class SharkController : EnemyController
         var xDirection = rigidbody.velocity.x > 0 ? 1 : -1;
         Direction = new Vector3(xDirection, 0, 0);
         rigidbody.velocity = Direction * Speed;
-
-        Debug.Log(Direction);
     }
 
     private State CurrentState;

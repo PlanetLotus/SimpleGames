@@ -103,6 +103,7 @@ MonoBehaviour:
   Direction: {x: -1, y: 0, z: 0}
   StateChangeIntervalInSeconds: 3
   ChargeSpeed: 4
+  ChargeChance: 0.2
 --- !u!212 &212458953606859568
 SpriteRenderer:
   m_ObjectHideFlags: 1
