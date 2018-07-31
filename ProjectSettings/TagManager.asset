@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - shark
+  - lr-boundary
+  - tb-boundary
+  - boundary
   layers:
   - Default
   - TransparentFX
