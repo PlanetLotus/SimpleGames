@@ -21,12 +21,18 @@ public class PlayerFishController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: Add logic for different types of units
-        // For now, player only collides with fish it can eat
-        FishManager.NumEnemies--;
-        Destroy(other.gameObject);
-        animator.SetBool("Eating", true);
-        Grow();
+        if (other.tag == "shark")
+        {
+            Debug.Log("Game over");
+            Destroy(gameObject);
+        }
+        else
+        {
+            FishManager.NumEnemies--;
+            Destroy(other.gameObject);
+            animator.SetBool("Eating", true);
+            Grow();
+        }
     }
 
     private void Update()
