@@ -9,14 +9,15 @@ public class SharkController : EnemyController
 
     protected override void Start()
     {
+        base.Start();
+
         // Every X seconds, decide whether to continue wandering
         // or charge toward player
         InvokeRepeating("PickState", 0, StateChangeIntervalInSeconds);
 
         // Assumes player max level is 4
         level = 4;
-
-        base.Start();
+        transform.localScale = new Vector3(2.5f, 1.2f);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
@@ -32,6 +33,7 @@ public class SharkController : EnemyController
         if (enemy.level <= level)
         {
             Destroy(other.gameObject);
+            FishManager.NumEnemies--;
         }
     }
 
@@ -73,8 +75,6 @@ public class SharkController : EnemyController
 
         var playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         Direction = (playerPosition - gameObject.transform.position).normalized;
-
-        Debug.Log(Direction);
 
         rigidbody.velocity = Direction * ChargeSpeed;
         rigidbody.drag = ChargeDrag;
