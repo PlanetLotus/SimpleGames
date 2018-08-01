@@ -5,6 +5,7 @@ public class SharkController : EnemyController
     public int StateChangeIntervalInSeconds;
     public float ChargeSpeed;
     public float ChargeChance;
+    public float ChargeDrag;
 
     protected override void Start()
     {
@@ -76,6 +77,7 @@ public class SharkController : EnemyController
         Debug.Log(Direction);
 
         rigidbody.velocity = Direction * ChargeSpeed;
+        rigidbody.drag = ChargeDrag;
     }
 
     private void Wander()
@@ -93,6 +95,7 @@ public class SharkController : EnemyController
         var xDirection = rigidbody.velocity.x > 0 ? 1 : -1;
         Direction = new Vector3(xDirection, 0, 0);
         rigidbody.velocity = Direction * Speed;
+        rigidbody.drag = 0;
     }
 
     private State CurrentState;
