@@ -18,6 +18,22 @@ public class SharkController : EnemyController
         base.Start();
     }
 
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
+
+        var enemy = other.gameObject.GetComponent<EnemyController>();
+        if (enemy == null)
+        {
+            return;
+        }
+
+        if (enemy.level <= level)
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
     private void PickState()
     {
         // Wander is the default state
