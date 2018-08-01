@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 
     public Vector3 Direction;
 
+    public int level = 0;
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "boundary")

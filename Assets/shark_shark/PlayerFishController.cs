@@ -8,8 +8,6 @@ public class PlayerFishController : MonoBehaviour
 
     public float Speed = 100f;
 
-    public Vector2 MaxScale;
-
     public List<int> numEatenPerLevel = new List<int> { 0, 5, 10, 20, 30, int.MaxValue };
 
     private void Start()
@@ -22,14 +20,24 @@ public class PlayerFishController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "shark")
+        var enemy = other.gameObject.GetComponent<EnemyController>();
+        if (enemy == null)
+        {
+            return;
+        }
+
+        if (enemy.level > level)
         {
             Debug.Log("Game over");
             Destroy(gameObject);
         }
         else
         {
-            FishManager.NumEnemies--;
+            if (other.tag != "shark")
+            {
+                FishManager.NumEnemies--;
+            }
+
             numEaten++;
             Destroy(other.gameObject);
             animator.SetBool("Eating", true);
@@ -77,7 +85,7 @@ public class PlayerFishController : MonoBehaviour
         }
 
         level++;
-        Debug.Log(string.Format("Player now level {0}", level));
+        Debug.Log(string.Format("Player has eaten {0} fish and is now level {1}", numEaten, level));
 
         sprite.size += growBy;
         collider.size += growBy;

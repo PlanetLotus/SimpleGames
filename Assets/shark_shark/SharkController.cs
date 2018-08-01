@@ -12,6 +12,9 @@ public class SharkController : EnemyController
         // or charge toward player
         InvokeRepeating("PickState", 0, StateChangeIntervalInSeconds);
 
+        // Assumes player max level is 4
+        level = 4;
+
         base.Start();
     }
 
