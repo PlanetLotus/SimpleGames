@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerFishController : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class PlayerFishController : MonoBehaviour
 
     public Vector2 MaxScale;
 
+    public List<int> numEatenPerLevel = new List<int> { 0, 5, 10, 20, 30, int.MaxValue };
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-
-        maxSize = sprite.size * MaxScale;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,6 +30,7 @@ public class PlayerFishController : MonoBehaviour
         else
         {
             FishManager.NumEnemies--;
+            numEaten++;
             Destroy(other.gameObject);
             animator.SetBool("Eating", true);
             Grow();
@@ -69,11 +71,13 @@ public class PlayerFishController : MonoBehaviour
 
     private void Grow()
     {
-        if (sprite.size.magnitude >= maxSize.magnitude)
+        if (numEaten < numEatenPerLevel[level])
         {
-            Debug.Log("Too big!");
             return;
         }
+
+        level++;
+        Debug.Log(string.Format("Player now level {0}", level));
 
         sprite.size += growBy;
         collider.size += growBy;
@@ -84,6 +88,8 @@ public class PlayerFishController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
 
-    private Vector2 maxSize;
-    private Vector2 growBy = new Vector2(0.5f, 0.5f);
+    private Vector2 growBy = new Vector2(0.3f, 0.3f);
+
+    private int numEaten = 0;
+    private int level = 0;
 }

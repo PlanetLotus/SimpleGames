@@ -281,7 +281,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.009628
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -587,6 +587,7 @@ MonoBehaviour:
   FacingLeft: 1
   Speed: 20
   MaxScale: {x: 3, y: 3}
+  numEatenPerLevel: 00000000050000000a000000140000001e000000ffffff7f
 --- !u!61 &1431891447
 BoxCollider2D:
   m_ObjectHideFlags: 0
